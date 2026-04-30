@@ -72,9 +72,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (window.scrollY >= top) current = sec.id;
     });
     navItems.forEach(a => {
+      a.classList.remove('active');
       a.style.color = '';
       if (a.getAttribute('href') === '#' + current) {
-        a.style.color = 'var(--blue)';
+        a.classList.add('active');
       }
     });
   };
