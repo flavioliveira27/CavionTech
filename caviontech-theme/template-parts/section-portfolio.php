@@ -30,10 +30,12 @@ $portfolio_query = new WP_Query(array(
               $image    = get_field('portfolio_image');
               $category = get_field('portfolio_category');
               $title    = get_field('portfolio_title');
+              $link     = get_field('portfolio_link');
               $img_url  = !empty($image) ? esc_url($image['url']) : '';
               $img_alt  = !empty($image) ? esc_attr($image['alt']) : esc_attr($title);
+              $tag      = $link ? 'a' : 'div';
             ?>
-            <div class="portfolio-card reveal">
+            <<?php echo $tag; ?> class="portfolio-card reveal" <?php echo $link ? 'href="' . esc_url($link) . '" target="_blank" rel="noopener noreferrer" style="text-decoration:none; display:block;"' : ''; ?>>
               <?php if ($img_url) : ?>
                 <img src="<?php echo $img_url; ?>" alt="<?php echo $img_alt; ?>">
               <?php endif; ?>
@@ -45,7 +47,7 @@ $portfolio_query = new WP_Query(array(
                   <h3><?php echo esc_html($title); ?></h3>
                 <?php endif; ?>
               </div>
-            </div>
+            </<?php echo $tag; ?>>
           <?php endwhile; ?>
           <?php wp_reset_postdata(); ?>
         <?php else : ?>

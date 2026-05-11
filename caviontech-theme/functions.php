@@ -145,6 +145,15 @@ function caviontech_register_acf_fields() {
                 'placeholder'   => 'Ex: Loja Virtual Premium',
             ),
             array(
+                'key'           => 'field_portfolio_link',
+                'label'         => 'Link do Projeto',
+                'name'          => 'portfolio_link',
+                'type'          => 'url',
+                'instructions'  => 'URL externa do projeto para onde o usuário será redirecionado ao clicar. Deixe em branco se não houver.',
+                'required'      => 0,
+                'placeholder'   => 'https://',
+            ),
+            array(
                 'key'           => 'field_portfolio_order',
                 'label'         => 'Ordem de Exibição',
                 'name'          => 'portfolio_order',
