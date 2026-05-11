@@ -4,11 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cavion Tech — Soluções em Tecnologia</title>
+  <title>Cavion Tech</title>
   <meta name="description"
     content="Cavion Tech: criamos sites, landing pages, aplicativos mobile, sistemas customizados, ERP e e-commerce para impulsionar o seu negócio.">
   <link rel="stylesheet" href="styles.css">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
 </head>
 
 <body>
@@ -26,6 +27,7 @@
         <a href="#services">Serviços</a>
         <a href="#why-choose">Diferenciais</a>
         <a href="#portfolio">Portfólio</a>
+        <a href="#contact" class="nav-cta-mobile">Fale Conosco</a>
       </div>
       <a href="#contact" class="nav-cta">Fale Conosco</a>
       <button class="nav-toggle" id="navToggle" aria-label="Menu">
@@ -71,7 +73,7 @@
       </div>
       <div class="about-content reveal-right">
         <div class="section-subtitle">// SOBRE NÓS</div>
-        <h2>Somos apaixonados por <span>tecnologia e inovação</span></h2>
+        <h2>Somos especialistas em <span>tecnologia e inovação</span></h2>
         <div class="title-line"></div>
         <p>A Cavion Tech nasceu com o propósito de oferecer soluções digitais de alta qualidade, combinando design
           moderno com tecnologia de ponta. Nossa equipe multidisciplinar trabalha para transformar a visão dos nossos
@@ -165,7 +167,7 @@
         <div class="why-shape-crosses"></div>
         <img src="assets/img/why-choose.png" alt="Equipe Cavion Tech" class="img-main">
         <div class="experience-badge">
-          <h3>+3 Anos De</h3>
+          <h3>+3 Anos de</h3>
           <p>Experiência</p>
         </div>
       </div>
@@ -262,12 +264,10 @@
 
   <section class="contact section" id="contact">
     <div class="container">
-      <div class="contact-card-layout">
-        <div class="contact-info-side reveal-left">
-          <h2>Vamos iniciar seu projeto?</h2>
-          <p class="contact-subtitle">Fale conosco para entendermos a sua necessidade e apresentarmos a melhor solução.
-          </p>
-
+      <div class="contact-overlap-wrapper reveal">
+        <!-- Front card (colored, info side) — left -->
+        <div class="contact-card-front">
+          <h3>Fale Conosco</h3>
           <div class="contact-items">
             <div class="contact-item">
               <div class="icon-circle"><i class="ri-mail-line"></i></div>
@@ -278,37 +278,44 @@
               <span>(61) 99442-8479</span>
             </div>
           </div>
-
           <div class="contact-social">
-            <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
-            <a href="#" aria-label="LinkedIn"><i class="ri-linkedin-fill"></i></a>
+            <a href="https://www.instagram.com/caviontech/" target="_blank" aria-label="Instagram"><i
+                class="ri-instagram-line"></i></a>
+            <a href="https://www.linkedin.com/in/fcsoliveira/" target="_blank" aria-label="LinkedIn"><i
+                class="ri-linkedin-fill"></i></a>
           </div>
         </div>
-
-        <form class="contact-form-side reveal-right" id="contactForm">
-          <div class="form-group">
-            <input type="text" id="name" placeholder="Seu Nome" required>
+        <!-- Back card (white, form side) — right -->
+        <div class="contact-card-back">
+          <div class="contact-form-header">
+            <h2>Vamos iniciar seu <span>projeto?</span></h2>
+            <p>Conte-nos sobre o seu projeto e descubra como podemos ajudar sua empresa com a solução mais adequada.</p>
           </div>
-          <div class="form-group">
-            <input type="email" id="email" placeholder="Seu E-mail" required>
-          </div>
-          <div class="form-group">
-            <select id="service">
-              <option value="" disabled selected hidden>Tipo de Serviço</option>
-              <option value="site">Site Profissional</option>
-              <option value="landing">Landing Page</option>
-              <option value="app">App Mobile</option>
-              <option value="sistema">Sistema Customizado</option>
-              <option value="erp">Sistema ERP</option>
-              <option value="ecommerce">E-Commerce</option>
-              <option value="outro">Outro</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <textarea id="message" placeholder="Sua Mensagem..." required></textarea>
-          </div>
-          <button type="submit" class="form-submit-btn">Enviar Mensagem <i class="ri-send-plane-fill"></i></button>
-        </form>
+          <form class="contact-form-side" id="contactForm">
+            <div class="form-group">
+              <input type="text" id="name" placeholder="Seu Nome" required>
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" placeholder="Seu E-mail" required>
+            </div>
+            <div class="form-group">
+              <select id="service">
+                <option value="" disabled selected hidden>Tipo de Serviço</option>
+                <option value="site">Site Profissional</option>
+                <option value="landing">Landing Page</option>
+                <option value="app">App Mobile</option>
+                <option value="sistema">Sistema Customizado</option>
+                <option value="erp">Sistema ERP</option>
+                <option value="ecommerce">E-Commerce</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <textarea id="message" placeholder="Sua Mensagem..." required></textarea>
+            </div>
+            <button type="submit" class="form-submit-btn">Enviar Mensagem <i class="ri-send-plane-fill"></i></button>
+          </form>
+        </div>
       </div>
     </div>
   </section>
@@ -324,40 +331,37 @@
           <p>Transformamos ideias em soluções digitais que impulsionam o crescimento do seu negócio. Inovação e
             qualidade em cada projeto.</p>
           <div class="footer-social">
-            <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
-            <a href="#" aria-label="LinkedIn"><i class="ri-linkedin-fill"></i></a>
-            <a href="#" aria-label="WhatsApp"><i class="ri-whatsapp-line"></i></a>
-            <a href="#" aria-label="GitHub"><i class="ri-github-fill"></i></a>
+            <a href="https://www.instagram.com/caviontech/" target="_blank" aria-label="Instagram"><i
+                class="ri-instagram-line"></i></a>
+            <a href="https://www.linkedin.com/in/fcsoliveira/" target="_blank" aria-label="LinkedIn"><i
+                class="ri-linkedin-fill"></i></a>
+            <a href="https://wa.me/message/4OZZDQTHZIRJI1" target="_blank" aria-label="WhatsApp"><i
+                class="ri-whatsapp-line"></i></a>
           </div>
         </div>
         <div class="footer-col">
-          <h4>Navegação</h4>
+          <h4>Empresa</h4>
           <ul>
-            <li><a href="#hero">Início</a></li>
-            <li><a href="#about">Sobre</a></li>
-            <li><a href="#services">Serviços</a></li>
-            <li><a href="#portfolio">Portfólio</a></li>
-            <li><a href="#contact">Contato</a></li>
+            <li><a href="#about">Sobre Nós</a></li>
+            <li><a href="#portfolio">Projetos</a></li>
+            <li><a href="#why-choose">Diferenciais</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Serviços</h4>
           <ul>
-            <li><a href="#services">Sites Profissionais</a></li>
-            <li><a href="#services">Landing Pages</a></li>
-            <li><a href="#services">Apps Mobile</a></li>
-            <li><a href="#services">Sistemas ERP</a></li>
-            <li><a href="#services">E-Commerce</a></li>
+            <li><a href="termos.html">Termos</a></li>
+            <li><a href="privacidade.html">Privacidade</a></li>
+            <li><a href="https://wa.me/message/4OZZDQTHZIRJI1" target="_blank">Dúvidas</a></li>
           </ul>
         </div>
-        <div class="footer-col">
-          <h4>Contato</h4>
-          <ul>
-            <li><a href="mailto:contato@caviontech.com.br"><i class="ri-mail-line"></i> contato@caviontech.com.br</a>
-            </li>
-            <li><a href="tel:+5511999999999"><i class="ri-phone-line"></i> (11) 99999-9999</a></li>
-            <li><a href="#"><i class="ri-map-pin-line"></i> São Paulo, SP</a></li>
-          </ul>
+        <div class="footer-col footer-newsletter">
+          <h4>Newsletter</h4>
+          <p>Receba novidades e insights sobre tecnologia.</p>
+          <form class="newsletter-form" id="newsletterForm">
+            <input type="email" placeholder="Seu e-mail..." required>
+            <button type="submit">OK</button>
+          </form>
         </div>
       </div>
       <div class="footer-bottom">
@@ -365,6 +369,12 @@
       </div>
     </div>
   </footer>
+
+  <!-- ===== WHATSAPP FLOATING BUTTON ===== -->
+  <a href="https://wa.me/message/4OZZDQTHZIRJI1" target="_blank" rel="noopener noreferrer" class="whatsapp-float"
+    aria-label="Fale conosco pelo WhatsApp">
+    <i class="ri-whatsapp-line"></i>
+  </a>
 
   <script src="script.js"></script>
 </body>

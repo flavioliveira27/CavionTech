@@ -145,4 +145,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  /* ===== NEWSLETTER FORM ===== */
+  const newsletterForm = document.getElementById('newsletterForm');
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const wrapper = newsletterForm.parentElement;
+      const origHTML = newsletterForm.outerHTML;
+      const descP = wrapper.querySelector('p');
+      if (descP) descP.style.display = 'none';
+      newsletterForm.outerHTML = '<p class="newsletter-success"><i class="ri-check-line"></i> Inscrição realizada com sucesso!</p>';
+      setTimeout(() => {
+        const successMsg = wrapper.querySelector('.newsletter-success');
+        if (successMsg) successMsg.outerHTML = origHTML;
+        if (descP) descP.style.display = '';
+        // Re-attach listener
+        const newForm = document.getElementById('newsletterForm');
+        if (newForm) {
+          newForm.addEventListener('submit', e => {
+            e.preventDefault();
+            newForm.reset();
+          });
+        }
+      }, 4000);
+    });
+  }
+
 });
