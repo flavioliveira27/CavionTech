@@ -31,20 +31,42 @@ $portfolio_query = new WP_Query(array(
               $category = get_field('portfolio_category');
               $title    = get_field('portfolio_title');
               $link     = get_field('portfolio_link');
+              $description = get_field('portfolio_description');
+              
+              if (!$description) {
+                  $description = get_the_excerpt();
+              }
+              if (!$title) {
+                  $title = get_the_title();
+              }
+
               $img_url  = !empty($image) ? esc_url($image['url']) : '';
               $img_alt  = !empty($image) ? esc_attr($image['alt']) : esc_attr($title);
               $tag      = $link ? 'a' : 'div';
             ?>
-            <<?php echo $tag; ?> class="portfolio-card reveal" <?php echo $link ? 'href="' . esc_url($link) . '" target="_blank" rel="noopener noreferrer" style="text-decoration:none; display:block;"' : ''; ?>>
-              <?php if ($img_url) : ?>
-                <img src="<?php echo $img_url; ?>" alt="<?php echo $img_alt; ?>">
-              <?php endif; ?>
-              <div class="portfolio-overlay">
-                <?php if ($category) : ?>
-                  <span><?php echo esc_html($category); ?></span>
+            <<?php echo $tag; ?> class="portfolio-card reveal" <?php echo $link ? 'href="' . esc_url($link) . '" target="_blank" rel="noopener noreferrer"' : ''; ?>>
+              <div class="portfolio-image-wrapper">
+                <?php if ($img_url) : ?>
+                  <img src="<?php echo $img_url; ?>" alt="<?php echo $img_alt; ?>">
+                <?php else: ?>
+                  <!-- Fallback se não houver imagem do ACF -->
+                  <?php if (has_post_thumbnail()): ?>
+                    <?php the_post_thumbnail('medium_large'); ?>
+                  <?php endif; ?>
                 <?php endif; ?>
+                
+                <?php if ($category) : ?>
+                  <span class="portfolio-category-badge"><?php echo esc_html($category); ?></span>
+                <?php endif; ?>
+              </div>
+              
+              <div class="portfolio-content">
                 <?php if ($title) : ?>
-                  <h3><?php echo esc_html($title); ?></h3>
+                  <h3 class="portfolio-title"><?php echo esc_html($title); ?></h3>
+                <?php endif; ?>
+                
+                <?php if ($description) : ?>
+                  <p class="portfolio-desc"><?php echo esc_html($description); ?></p>
                 <?php endif; ?>
               </div>
             </<?php echo $tag; ?>>
