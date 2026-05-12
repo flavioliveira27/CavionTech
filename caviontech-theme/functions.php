@@ -136,6 +136,15 @@ function caviontech_register_acf_fields() {
                 'placeholder'   => 'Ex: E-Commerce',
             ),
             array(
+                'key'           => 'field_portfolio_category_color',
+                'label'         => 'Cor da Categoria',
+                'name'          => 'portfolio_category_color',
+                'type'          => 'color_picker',
+                'instructions'  => 'Escolha a cor de fundo da etiqueta da categoria.',
+                'required'      => 0,
+                'default_value' => '#0d47ff',
+            ),
+            array(
                 'key'           => 'field_portfolio_title',
                 'label'         => 'Título do Projeto',
                 'name'          => 'portfolio_title',

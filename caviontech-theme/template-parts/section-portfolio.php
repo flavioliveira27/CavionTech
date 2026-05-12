@@ -17,18 +17,11 @@ $portfolio_query = new WP_Query(array(
 ?>
 
   <!-- ===== PORTFÓLIO ===== -->
-  <section class="portfolio section" id="portfolio" style="background-color: #0B1120;">
+  <section class="portfolio section" id="portfolio">
     <div class="container">
-      <div class="section-header reveal" style="display: flex; justify-content: space-between; align-items: flex-end; text-align: left; max-width: 100%;">
-        <div>
-            <h2 style="color: #F8FAFC;">Projetos em <span style="background: linear-gradient(90deg, #00BFFF, #38BDF8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Destaque</span></h2>
-            <p style="color: #94A3B8; max-width: 600px;">Conheça alguns dos projetos que desenvolvemos com dedicação e excelência para nossos clientes.</p>
-        </div>
-        <div class="section-link-right" style="display: none;"> <!-- Oculto por padrão no mobile, visível no CSS se quiser -->
-            <a href="<?php echo home_url('/projetos'); ?>" class="btn btn-dark-glass"
-                style="border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #E2E8F0; padding: 10px 20px; font-weight: 600;">Ver Todos
-                os Projetos <i class="ri-arrow-right-line"></i></a>
-        </div>
+      <div class="section-header reveal">
+        <h2>Projetos em <span>Destaque</span></h2>
+        <p>Conheça alguns dos projetos que desenvolvemos com dedicação e excelência para nossos clientes.</p>
       </div>
 
       <div class="projects-grid">
@@ -38,15 +31,17 @@ $portfolio_query = new WP_Query(array(
         if ($portfolio_query->have_posts()) :
           while ($portfolio_query->have_posts()) : $portfolio_query->the_post();
             
-            // Adaptando para os campos ACF que já temos
+            // Adaptando para os campos ACF
             $image    = get_field('portfolio_image');
             $cat_nome = get_field('portfolio_category');
+            $cat_cor  = get_field('portfolio_category_color');
             $title    = get_field('portfolio_title');
             $link     = get_field('portfolio_link');
             $desc     = get_field('portfolio_description');
             
             if (!$desc)  $desc = get_the_excerpt();
             if (!$title) $title = get_the_title();
+            if (!$cat_cor) $cat_cor = 'var(--blue)'; // Fallback para azul se não estiver preenchido
             
             $link_final = $link ? $link : get_permalink();
             $link_target = $link ? ' target="_blank" rel="noopener noreferrer"' : '';
@@ -61,7 +56,7 @@ $portfolio_query = new WP_Query(array(
             <div class="project-card reveal-up <?php echo $delay_class; ?>">
                 <div class="project-img">
                     <?php if ($cat_nome): ?>
-                        <span class="tag-floating"><?php echo esc_html($cat_nome); ?></span>
+                        <span class="tag-floating" style="background-color: <?php echo esc_attr($cat_cor); ?>;"><?php echo esc_html($cat_nome); ?></span>
                     <?php endif; ?>
 
                     <div class="img-placeholder">

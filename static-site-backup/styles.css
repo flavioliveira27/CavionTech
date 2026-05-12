@@ -1085,63 +1085,137 @@ textarea {
   background: var(--white);
 }
 
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
 }
 
-.portfolio-card {
-  position: relative;
-  border-radius: var(--radius);
-  overflow: hidden;
-  cursor: pointer;
-  group: true;
+.project-card {
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    background: var(--white);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition), box-shadow var(--transition);
 }
 
-.portfolio-card img {
-  width: 100%;
-  height: 280px;
-  object-fit: cover;
-  transition: var(--transition);
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(13, 71, 255, 0.1);
 }
 
-.portfolio-card:hover img {
-  transform: scale(1.05);
+.project-img {
+    width: calc(100% - 20px);
+    height: 190px;
+    background: var(--light);
+    overflow: hidden;
+    position: relative;
+    margin: 10px;
+    border-radius: 8px;
 }
 
-.portfolio-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(10, 15, 31, .85) 0%, transparent 60%);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 28px;
-  opacity: 0;
-  transition: var(--transition);
+.img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    color: var(--dark);
+    font-size: 1.5rem;
+    background: linear-gradient(45deg, #f2f5fa, #e2e8f0);
+    transition: transform var(--transition);
 }
 
-.portfolio-card:hover .portfolio-overlay {
-  opacity: 1;
+.project-card:hover .img-placeholder {
+    transform: scale(1.05);
 }
 
-.portfolio-overlay span {
-  font-size: .78rem;
-  color: var(--cyan);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .5px;
-  margin-bottom: 6px;
+.project-info {
+    padding: 1.25rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 180px;
 }
 
-.portfolio-overlay h3 {
-  font-size: 1.15rem;
-  color: var(--white);
-  font-weight: 700;
+.project-info h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+    font-weight: 700;
 }
 
-/* ===== CONTACT FORM — Overlapping Cards ===== */
+.project-desc {
+    color: var(--gray);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.project-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.link-cyan {
+    color: var(--dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color var(--transition);
+}
+
+.link-cyan:hover {
+    color: var(--blue);
+}
+
+.icon-link {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--light);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray);
+    transition: all var(--transition);
+}
+
+.icon-link:hover {
+    background: var(--blue);
+    color: var(--white);
+    border-color: var(--blue);
+}
+
+.tag-floating {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    color: var(--white);
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    z-index: 2;
+}
+
+/* ===== CONTACT FORM â€” Overlapping Cards ===== */
 .contact {
   background: var(--light);
   position: relative;
@@ -1158,7 +1232,7 @@ textarea {
   justify-content: center;
 }
 
-/* Front card — gradient blue, overlaps left, sits on top */
+/* Front card â€” gradient blue, overlaps left, sits on top */
 .contact-card-front {
   position: relative;
   z-index: 2;
@@ -1175,7 +1249,7 @@ textarea {
   align-self: center;
 }
 
-/* Back card — white, holds the form, sits to the right */
+/* Back card â€” white, holds the form, sits to the right */
 .contact-card-back {
   position: relative;
   z-index: 1;
