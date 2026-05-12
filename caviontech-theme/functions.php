@@ -154,6 +154,15 @@ function caviontech_register_acf_fields() {
                 'placeholder'   => 'https://',
             ),
             array(
+                'key'           => 'field_portfolio_description',
+                'label'         => 'Descrição do Projeto',
+                'name'          => 'portfolio_description',
+                'type'          => 'textarea',
+                'instructions'  => 'Descrição curta do projeto que aparecerá no card. (Máx: 3 linhas recomendadas).',
+                'required'      => 0,
+                'rows'          => 4,
+            ),
+            array(
                 'key'           => 'field_portfolio_order',
                 'label'         => 'Ordem de Exibição',
                 'name'          => 'portfolio_order',
