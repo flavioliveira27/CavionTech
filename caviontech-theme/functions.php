@@ -47,20 +47,20 @@ function caviontech_scripts() {
         '4.1.0'
     );
 
-    // Main stylesheet
+    // Main stylesheet (filemtime garante cache-bust automático)
     wp_enqueue_style(
         'caviontech-style',
         get_stylesheet_uri(),
         array('google-fonts-inter', 'remixicon'),
-        wp_get_theme()->get('Version')
+        filemtime(get_stylesheet_directory() . '/style.css')
     );
 
-    // Main script
+    // Main script (filemtime garante cache-bust automático)
     wp_enqueue_script(
         'caviontech-script',
         get_template_directory_uri() . '/assets/js/script.js',
         array(),
-        wp_get_theme()->get('Version'),
+        filemtime(get_template_directory() . '/assets/js/script.js'),
         true // Load in footer
     );
 }

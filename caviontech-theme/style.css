@@ -4,7 +4,7 @@ Theme URI: https://caviontech.com
 Author: Cavion Tech
 Author URI: https://caviontech.com
 Description: Tema profissional da Cavion Tech - Soluções digitais sob medida.
-Version: 1.0.1
+Version: 1.1.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: caviontech
@@ -1947,7 +1947,7 @@ textarea {
   }
 
   .services-grid,
-  .portfolio-grid {
+  .projects-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -2134,7 +2134,7 @@ textarea {
 
   /* --- Services & Portfolio --- */
   .services-grid,
-  .portfolio-grid {
+  .projects-grid {
     grid-template-columns: 1fr;
   }
 

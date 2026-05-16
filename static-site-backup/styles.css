@@ -1934,7 +1934,7 @@ textarea {
   }
 
   .services-grid,
-  .portfolio-grid {
+  .projects-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -2121,7 +2121,7 @@ textarea {
 
   /* --- Services & Portfolio --- */
   .services-grid,
-  .portfolio-grid {
+  .projects-grid {
     grid-template-columns: 1fr;
   }
 
