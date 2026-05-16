@@ -1099,6 +1099,8 @@ textarea {
     border: 1px solid rgba(0, 0, 0, 0.04);
     box-shadow: var(--shadow-sm);
     transition: transform var(--transition), box-shadow var(--transition);
+    display: flex;
+    flex-direction: column;
 }
 
 .project-card:hover {
@@ -1139,6 +1141,7 @@ textarea {
     position: relative;
     display: flex;
     flex-direction: column;
+    flex: 1;
     min-height: 180px;
 }
 
@@ -1149,15 +1152,55 @@ textarea {
     font-weight: 700;
 }
 
+.project-desc-wrapper {
+    position: relative;
+    margin-bottom: 0.75rem;
+}
+
 .project-desc {
     color: var(--gray);
     font-size: 0.95rem;
-    margin-bottom: 1rem;
     line-height: 1.6;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-desc-wrapper.expanded .project-desc {
+    display: block;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+}
+
+.desc-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    color: var(--blue);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 6px 0;
+    margin-top: 4px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.desc-toggle:hover {
+    color: var(--dark);
+}
+
+.desc-toggle i {
+    font-size: 0.95rem;
+    transition: transform 0.3s ease;
+}
+
+.project-desc-wrapper.expanded .desc-toggle i {
+    transform: rotate(180deg);
 }
 
 .project-footer {

@@ -170,5 +170,22 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 4000);
     });
   }
+  /* ===== PORTFOLIO DESCRIPTION TOGGLE ===== */
+  document.querySelectorAll('.desc-toggle').forEach(btn => {
+    const wrapper = btn.closest('.project-desc-wrapper');
+    const desc = wrapper.querySelector('.project-desc');
+    
+    // Only show toggle if text is actually truncated
+    if (desc.scrollHeight <= desc.clientHeight + 2) {
+      btn.style.display = 'none';
+    }
+
+    btn.addEventListener('click', () => {
+      const isExpanded = wrapper.classList.toggle('expanded');
+      btn.innerHTML = isExpanded 
+        ? 'Ver menos <i class="ri-arrow-down-s-line"></i>' 
+        : 'Ver mais <i class="ri-arrow-down-s-line"></i>';
+    });
+  });
 
 });

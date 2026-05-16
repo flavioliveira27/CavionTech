@@ -71,8 +71,11 @@ $portfolio_query = new WP_Query(array(
                 </div>
                 <div class="project-info">
                     <h3><?php echo esc_html($title); ?></h3>
-                    <div class="project-desc">
-                        <?php echo esc_html($desc); ?>
+                    <div class="project-desc-wrapper">
+                        <div class="project-desc">
+                            <?php echo esc_html($desc); ?>
+                        </div>
+                        <button class="desc-toggle" type="button">Ver mais <i class="ri-arrow-down-s-line"></i></button>
                     </div>
                     <div class="project-footer">
                         <a href="<?php echo esc_url($link_final); ?>" class="link-cyan" <?php echo $link_target; ?>>Ver Projeto Completo <i class="ri-arrow-right-line"></i></a>
