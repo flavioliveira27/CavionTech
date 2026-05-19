@@ -16,6 +16,7 @@ services:
       - wp_uploads_prod:/var/www/html/wp-content/uploads:ro
       - certbot_certs:/etc/letsencrypt:ro
       - certbot_www:/var/www/certbot:ro
+      - ./ironvault:/var/www/ironvault:ro
     depends_on:
       - wordpress
     networks:
