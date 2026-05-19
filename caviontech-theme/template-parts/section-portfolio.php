@@ -54,6 +54,9 @@ $portfolio_query = new WP_Query(array(
         ?>
             <!-- Projeto Dinâmico -->
             <div class="project-card reveal-up <?php echo $delay_class; ?>">
+                <!-- Link sobreposto para tornar todo o card clicável -->
+                <a href="<?php echo esc_url($link_final); ?>" class="card-overlay-link" <?php echo $link_target; ?> aria-label="<?php echo esc_attr($title); ?>"></a>
+                
                 <div class="project-img">
                     <?php if ($cat_nome): ?>
                         <span class="tag-floating" style="background-color: <?php echo esc_attr($cat_cor); ?>;"><?php echo esc_html($cat_nome); ?></span>
