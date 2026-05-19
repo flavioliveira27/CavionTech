@@ -1088,193 +1088,196 @@ textarea {
 }
 
 .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
 }
 
 .project-card {
-    border-radius: 12px;
-    overflow: hidden;
-    position: relative;
-    background: var(--white);
-    border: 1px solid rgba(0, 0, 0, 0.04);
-    box-shadow: var(--shadow-sm);
-    transition: transform var(--transition), box-shadow var(--transition);
-    display: flex;
-    flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  background: var(--white);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+  display: flex;
+  flex-direction: column;
 }
 
 .card-overlay-link {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
 /* Garante que os elementos interativos fiquem acima do link de overlay */
 .project-card .desc-toggle,
 .project-card .project-footer,
 .project-card .tag-floating {
-    position: relative;
-    z-index: 2;
+  position: relative;
+  z-index: 2;
 }
 
 .project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-md);
-    border-color: rgba(13, 71, 255, 0.1);
+  transform: translateY(-8px) !important;
+  box-shadow: var(--shadow-md);
+  border-color: rgba(13, 71, 255, 0.1);
 }
 
 .project-img {
-    width: calc(100% - 20px);
-    height: 190px;
-    background: var(--light);
-    overflow: hidden;
-    position: relative;
-    margin: 10px;
-    border-radius: 8px;
+  width: calc(100% - 20px);
+  height: 190px;
+  background: var(--light);
+  overflow: hidden;
+  position: relative;
+  margin: 10px;
+  border-radius: 8px;
 }
 
 .img-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: inherit;
-    color: var(--dark);
-    font-size: 1.5rem;
-    background: linear-gradient(45deg, #f2f5fa, #e2e8f0);
-    transition: transform var(--transition);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  color: var(--dark);
+  font-size: 1.5rem;
+  background: linear-gradient(45deg, #f2f5fa, #e2e8f0);
+  transition: transform var(--transition);
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .project-card:hover .img-placeholder {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .project-info {
-    padding: 1.25rem;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-height: 180px;
+  padding: 1.25rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 180px;
 }
 
 .project-info h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-    color: var(--dark);
-    font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--dark);
+  font-weight: 700;
 }
 
 .project-desc-wrapper {
-    position: relative;
-    margin-bottom: 0.75rem;
+  position: relative;
+  margin-bottom: 0.75rem;
 }
 
 .project-desc {
-    color: var(--gray);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--gray);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project-desc-wrapper.expanded .project-desc {
-    display: block;
-    -webkit-line-clamp: unset;
-    overflow: visible;
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
 }
 
 .desc-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background: none;
-    border: none;
-    color: var(--blue);
-    font-size: 0.82rem;
-    font-weight: 600;
-    cursor: pointer;
-    padding: 6px 0;
-    margin-top: 4px;
-    transition: all 0.3s ease;
-    font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: var(--blue);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 0;
+  margin-top: 4px;
+  transition: all 0.3s ease;
+  font-family: inherit;
 }
 
 .desc-toggle:hover {
-    color: var(--dark);
+  color: var(--dark);
 }
 
 .desc-toggle i {
-    font-size: 0.95rem;
-    transition: transform 0.3s ease;
+  font-size: 0.95rem;
+  transition: transform 0.3s ease;
 }
 
 .project-desc-wrapper.expanded .desc-toggle i {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .project-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .link-cyan {
-    color: var(--dark);
-    font-weight: 600;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: color var(--transition);
+  color: var(--dark);
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color var(--transition);
 }
 
 .link-cyan:hover {
-    color: var(--blue);
+  color: var(--blue);
 }
 
 .icon-link {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    background: var(--light);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--gray);
-    transition: all var(--transition);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--light);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray);
+  transition: all var(--transition);
 }
 
 .icon-link:hover {
-    background: var(--blue);
-    color: var(--white);
-    border-color: var(--blue);
+  background: var(--blue);
+  color: var(--white);
+  border-color: var(--blue);
 }
 
 .tag-floating {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    color: var(--white);
-    padding: 0.35rem 0.85rem;
-    border-radius: 20px;
-    font-size: 0.65rem;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    z-index: 2;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: var(--white);
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  z-index: 2;
 }
 
 /* ===== CONTACT FORM â€” Overlapping Cards ===== */
