@@ -123,15 +123,75 @@ document.addEventListener('DOMContentLoaded', () => {
   if (form) {
     form.addEventListener('submit', e => {
       e.preventDefault();
-      const btn = form.querySelector('.form-submit');
+      
+      const btn = form.querySelector('.form-submit-btn');
+      if (!btn) return;
+      
+      // Remove any existing status message
+      const existingStatus = form.querySelector('.form-status-message');
+      if (existingStatus) {
+        existingStatus.remove();
+      }
+
       const origHTML = btn.innerHTML;
-      btn.innerHTML = '<i class="ri-check-line"></i> Mensagem Enviada!';
-      btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-      setTimeout(() => {
-        btn.innerHTML = origHTML;
-        btn.style.background = '';
-        form.reset();
-      }, 3000);
+      
+      // Set loading state
+      btn.disabled = true;
+      btn.innerHTML = '<i class="ri-loader-4-line ri-spin"></i> Enviando...';
+      btn.style.opacity = '0.8';
+
+      // Prepare request data
+      const formData = new FormData();
+      formData.append('action', 'submit_contact_form');
+      formData.append('nonce', caviontech_ajax.nonce);
+      formData.append('name', document.getElementById('name').value);
+      formData.append('email', document.getElementById('email').value);
+      formData.append('service', document.getElementById('service').value);
+      formData.append('message', document.getElementById('message').value);
+
+      // Perform fetch request
+      fetch(caviontech_ajax.ajax_url, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Success state
+          btn.innerHTML = '<i class="ri-check-line"></i> Mensagem Enviada!';
+          btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+          btn.style.opacity = '1';
+          form.reset();
+        } else {
+          // Failure state (returned from WordPress)
+          throw new Error(data.data.message || 'Erro ao enviar a mensagem.');
+        }
+      })
+      .catch(error => {
+        // Error state
+        btn.innerHTML = '<i class="ri-error-warning-line"></i> Falha no Envio';
+        btn.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
+        btn.style.opacity = '1';
+
+        // Add visual error message below the button
+        const statusMsg = document.createElement('p');
+        statusMsg.className = 'form-status-message error';
+        statusMsg.style.color = '#ef4444';
+        statusMsg.style.fontSize = '14px';
+        statusMsg.style.marginTop = '10px';
+        statusMsg.style.textAlign = 'center';
+        statusMsg.innerHTML = `<i class="ri-error-warning-line"></i> ${error.message}`;
+        form.appendChild(statusMsg);
+      })
+      .finally(() => {
+        // Restore button state after a delay
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.innerHTML = origHTML;
+          btn.style.background = '';
+          btn.style.opacity = '';
+        }, 4500);
+      });
     });
   }
 

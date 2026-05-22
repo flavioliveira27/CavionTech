@@ -63,6 +63,11 @@ function caviontech_scripts() {
         filemtime(get_template_directory() . '/assets/js/script.js'),
         true // Load in footer
     );
+
+    wp_localize_script('caviontech-script', 'caviontech_ajax', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce'    => wp_create_nonce('caviontech_contact_nonce'),
+    ));
 }
 add_action('wp_enqueue_scripts', 'caviontech_scripts');
 
@@ -216,3 +221,123 @@ function caviontech_clean_head() {
     remove_action('wp_head', 'wp_shortlink_wp_head');
 }
 add_action('after_setup_theme', 'caviontech_clean_head');
+
+// ===== SMTP EMAIL CONFIGURATION =====
+function caviontech_smtp_setup($phpmailer) {
+    // Get values from environment variables or fallback to constants/defaults
+    $smtp_host = getenv('SMTP_HOST') ?: (defined('SMTP_HOST') ? SMTP_HOST : '');
+    $smtp_port = getenv('SMTP_PORT') ?: (defined('SMTP_PORT') ? SMTP_PORT : '');
+    $smtp_encryption = getenv('SMTP_ENCRYPTION') ?: (defined('SMTP_ENCRYPTION') ? SMTP_ENCRYPTION : '');
+    $smtp_user = getenv('SMTP_USER') ?: (defined('SMTP_USER') ? SMTP_USER : '');
+    $smtp_password = getenv('SMTP_PASSWORD') ?: (defined('SMTP_PASSWORD') ? SMTP_PASSWORD : '');
+    $smtp_from = getenv('SMTP_FROM') ?: (defined('SMTP_FROM') ? SMTP_FROM : '');
+    $smtp_from_name = getenv('SMTP_FROM_NAME') ?: (defined('SMTP_FROM_NAME') ? SMTP_FROM_NAME : 'Cavion Tech');
+
+    // Only configure SMTP if the host and user are defined
+    if (!empty($smtp_host) && !empty($smtp_user)) {
+        $phpmailer->isSMTP();
+        $phpmailer->Host       = $smtp_host;
+        $phpmailer->SMTPAuth   = true;
+        $phpmailer->Port       = intval($smtp_port);
+        $phpmailer->Username   = $smtp_user;
+        $phpmailer->Password   = $smtp_password;
+        $phpmailer->SMTPSecure = $smtp_encryption; // 'ssl' or 'tls'
+
+        // Set from email and name
+        if (!empty($smtp_from)) {
+            $phpmailer->From     = $smtp_from;
+            $phpmailer->FromName = $smtp_from_name;
+        }
+    }
+}
+add_action('phpmailer_init', 'caviontech_smtp_setup');
+
+// ===== AJAX CONTACT FORM HANDLER =====
+function caviontech_handle_contact_form() {
+    // Check nonce for security
+    check_ajax_referer('caviontech_contact_nonce', 'nonce');
+
+    // Get and sanitize inputs
+    $name    = isset($_POST['name']) ? sanitize_text_field($_POST['name']) : '';
+    $email   = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
+    $service = isset($_POST['service']) ? sanitize_text_field($_POST['service']) : '';
+    $message = isset($_POST['message']) ? sanitize_textarea_field($_POST['message']) : '';
+
+    // Validate required fields
+    if (empty($name) || empty($email) || empty($message)) {
+        wp_send_json_error(array('message' => 'Por favor, preencha todos os campos obrigatórios.'));
+    }
+
+    if (!is_email($email)) {
+        wp_send_json_error(array('message' => 'Por favor, insira um e-mail válido.'));
+    }
+
+    // Map service options to readable labels
+    $services_map = array(
+        'site'      => 'Site Profissional',
+        'landing'   => 'Landing Page',
+        'app'       => 'App Mobile',
+        'sistema'   => 'Sistema Customizado',
+        'erp'       => 'Sistema ERP',
+        'ecommerce' => 'E-Commerce',
+        'outro'     => 'Outro'
+    );
+    $service_label = isset($services_map[$service]) ? $services_map[$service] : 'Não especificado';
+
+    // Email recipient
+    $to = getenv('SMTP_FROM') ?: 'contato@caviontech.com';
+
+    // Email subject
+    $subject = 'Novo contato recebido pelo site - ' . $name;
+
+    // Email body (HTML)
+    $body = "
+    <html>
+    <head>
+        <title>Novo Contato - Cavion Tech</title>
+        <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { padding: 20px; border: 1px solid #eee; border-radius: 5px; max-width: 600px; }
+            .header { background: #0d47ff; color: #fff; padding: 15px; border-radius: 5px 5px 0 0; text-align: center; }
+            .content { padding: 20px 10px; }
+            .field { margin-bottom: 15px; }
+            .label { font-weight: bold; color: #0d47ff; }
+            .footer { font-size: 12px; color: #777; margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px; text-align: center; }
+        </style>
+    </head>
+    <body>
+        <div class='container'>
+            <div class='header'>
+                <h2>Novo Lead de Projeto</h2>
+            </div>
+            <div class='content'>
+                <div class='field'><span class='label'>Nome:</span> {$name}</div>
+                <div class='field'><span class='label'>E-mail:</span> {$email}</div>
+                <div class='field'><span class='label'>Serviço de Interesse:</span> {$service_label}</div>
+                <div class='field'><span class='label'>Mensagem:</span><br/>" . nl2br($message) . "</div>
+            </div>
+            <div class='footer'>
+                Este e-mail foi enviado automaticamente a partir do formulário de contato do site Cavion Tech.
+            </div>
+        </div>
+    </body>
+    </html>
+    ";
+
+    // Email headers
+    $headers = array(
+        'Content-Type: text/html; charset=UTF-8',
+        'Reply-To: ' . $name . ' <' . $email . '>'
+    );
+
+    // Send email using WordPress wp_mail
+    $sent = wp_mail($to, $subject, $body, $headers);
+
+    if ($sent) {
+        wp_send_json_success(array('message' => 'Sua mensagem foi enviada com sucesso! Entraremos em contato em breve.'));
+    } else {
+        wp_send_json_error(array('message' => 'Ocorreu um erro ao enviar seu e-mail. Por favor, tente novamente mais tarde ou envie diretamente para contato@caviontech.com.'));
+    }
+}
+add_action('wp_ajax_submit_contact_form', 'caviontech_handle_contact_form');
+add_action('wp_ajax_nopriv_submit_contact_form', 'caviontech_handle_contact_form');
